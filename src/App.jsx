@@ -1,13 +1,22 @@
-import { useState } from 'react'
+import React from 'react'; // Make sure to import React
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
-
-function App() {
-
-  return (
-    <div className='App'>
-
-    </div>
-  )
+function Home() {
+  return <div>Home Page</div>;
 }
 
-export default App
+function App() {
+  return (
+    <>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={''} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+}
+
+export default App;
