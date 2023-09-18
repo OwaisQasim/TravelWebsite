@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from './Button'
+import './Navbar.css'
 
 export default function Navbar() {
     const [click, setClick] = useState(false)
+    const [button, setButton] = useState(true)
+
+
 
     const handleClick = () => {
         setClick(!click)
@@ -11,10 +16,25 @@ export default function Navbar() {
     const closeMobileMenu = () => {
         setClick(false)
     }
+
+    const showButton = () => {
+        if (window.innerWidth <= 960) {
+            setButton(false)
+        } else {
+            setButton(true)
+        }
+    }
+
+    useEffect(() => {
+        showButton()
+    }, [])
+
+    window.addEventListener('resize', showButton)
+
     return (
         <div className='navbar'>
             <div className="navbar-container">
-                <Link to='/' className='navbar-logo'>
+                <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                     TRVL <i className='fab fa-typo3'></i>
                 </Link>
                 <div className="menu-icon" onClick={handleClick}>
@@ -50,6 +70,7 @@ export default function Navbar() {
                         </Link>
                     </li>
                 </ul>
+                {button && <Button buttonStyle='btn--outline'>Sign Up</Button>}
             </div>
         </div>
     )
